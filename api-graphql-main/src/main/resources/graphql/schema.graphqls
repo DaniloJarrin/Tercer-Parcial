@@ -1,0 +1,44 @@
+type Mutation{
+    createProyecto(nombre: String!, descripcion: String!): Proyecto
+    updateProyecto(id: ID!, nombre: String!, descripcion: String!): Proyecto
+    deleteProyecto(id: ID!): Boolean
+
+    createEmpleado(nombre: String!, puesto: String!): Empleado
+    updateEmpleado(id: ID!, nombre: String!, puesto: String!): Empleado
+    deleteEmpleado(id: ID!): Boolean
+
+    createTarea(titulo: String!, descripcion: String!, proyectoId: ID!, empleadoIds: [ID!]!): Tarea
+    updateTarea(id: ID!, titulo: String!, descripcion: String!, proyectoId: ID!, empleadoIds: [ID!]!): Tarea
+    deleteTarea(id: ID!): Boolean
+}
+
+type Query {
+    proyectos: [Proyecto]
+    proyecto(id: ID!): Proyecto
+    empleados: [Empleado]
+    empleado(id: ID!): Empleado
+    tareas: [Tarea]
+    tarea(id: ID!): Tarea
+}
+
+type Proyecto {
+    id: ID!
+    nombre: String!
+    descripcion: String!
+    tareas: [Tarea]
+}
+
+type Empleado {
+    id: ID!
+    nombre: String!
+    puesto: String!
+    tareas: [Tarea]
+}
+
+type Tarea {
+    id: ID!
+    titulo: String!
+    descripcion: String!
+    proyecto: Proyecto
+    empleados: [Empleado]
+}
